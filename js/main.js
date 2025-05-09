@@ -8,7 +8,7 @@ $(document).ready(function() {
     }, 20000);
     let hasUserInteracted = false;
     const backgroundMusic = document.getElementById('backgroundMusic');
-    const pageFlipSound = new Audio('./page-flip.mp3'); // Update path to your sound file
+    const pageFlipSound = new Audio('../page-flip.mp3');
     pageFlipSound.volume = 0.2;
     backgroundMusic.volume = 0.5; // Reduced volume for background music
 
