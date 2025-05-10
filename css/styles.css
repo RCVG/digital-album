@@ -1,313 +1,462 @@
 /* Reset and base styles */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    font-family: 'Roboto', sans-serif;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
+  background: #121212; /* Dark background */
+  color: #f5f5f5;
+  font-family: "Roboto", sans-serif;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  perspective: 1000px;
 }
 
 .container {
-    text-align: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
 /* Title styles */
 .album-title {
-    font-family: 'Dancing Script', cursive;
-    font-size: 3em;
-    margin-bottom: 30px;
-    color: #ff4b6e;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-    animation: fadeIn 1s ease-in;
+  font-family: "Dancing Script", cursive;
+  font-size: 3em;
+  margin-bottom: 30px;
+  color: #fff;
+  text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #ff4b6e, 0 0 20px #ff4b6e, 0 0 25px #ff4b6e, 0 0 30px #ff4b6e, 0 0
+    35px #ff4b6e;
+  animation: neonPulse 1.5s ease-in-out infinite alternate;
 }
 
 /* Flipbook styles */
 #flipbook {
-    width: 800px;
-    height: 600px;
-    margin: 0 auto;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    background-color: transparent !important;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  width: 1400px;
+  height: 1050px;
+  margin: 0 auto;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-color: transparent !important;
+  box-shadow: 0 10px 30px rgba(255, 75, 110, 0.3); /* Pink glow */
+  border: 5px solid transparent;
+  background-clip: padding-box;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(255, 75, 110, 0.3);
+  transform: rotateX(5deg);
+  transition: transform 0.5s ease;
+}
+
+#flipbook::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  background: linear-gradient(45deg, #ff758c, #ff7eb3, #ff4b6e, #ff758c);
+  background-size: 400% 400%;
+  z-index: -1;
+  animation: gradientBorder 8s ease infinite;
+  border-radius: 2px;
+}
+
+#flipbook:hover {
+  transform: rotateX(0deg);
 }
 
 #flipbook .page {
-    background: #fff;
-    padding: 0;
-    overflow: hidden;
-    background-size: cover;
-    background-position: center;
+  background: #1e1e1e; /* Dark page background */
+  padding: 0;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.3s ease;
+}
+
+#flipbook .page::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 30px;
+  pointer-events: none;
+}
+
+#flipbook .odd::after {
+  right: 0;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.2), transparent);
+}
+
+#flipbook .even::after {
+  left: 0;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.2), transparent);
 }
 
 #flipbook .hard {
-    background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%) !important;
-    color: white;
-    box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.2);
-    font-weight: bold;
+  background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%) !important;
+  color: white;
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.4);
+  font-weight: bold;
 }
 
 #flipbook .odd {
-    background: linear-gradient(to left, #fff 95%, #dedede 100%);
-    box-shadow: inset -4px 0 50px -4px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(to left, #1e1e1e 95%, #111 100%);
+  box-shadow: inset -4px 0 50px -4px rgba(0, 0, 0, 0.3);
 }
 
 #flipbook .even {
-    background: linear-gradient(to right, #fff 95%, #dedede 100%);
-    box-shadow: inset 4px 0 50px -4px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(to right, #1e1e1e 95%, #111 100%);
+  box-shadow: inset 4px 0 50px -4px rgba(0, 0, 0, 0.3);
 }
 
 /* Cover styles */
 .cover {
-    background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
+  background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
 }
 
 .cover::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(45deg, transparent 45%, rgba(255, 255, 255, 0.1) 50%, transparent 55%);
-    animation: shine 2s infinite;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 45%, rgba(255, 255, 255, 0.2) 50%, transparent 55%);
+  animation: shine 3s infinite;
 }
 
 .message {
-    font-family: 'Dancing Script', cursive;
-    color: white;
-    font-size: 2.5em;
-    padding: 40px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-    position: relative;
-    z-index: 1;
+  font-family: "Dancing Script", cursive;
+  color: white;
+  font-size: 2.5em;
+  padding: 40px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 1;
 }
 
 /* Control buttons */
 .controls {
-    margin-top: 30px;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
 }
 
 button {
-    padding: 12px 24px;
-    font-size: 1.1em;
-    border: none;
-    background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
-    color: white;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 12px 24px;
+  font-size: 1.1em;
+  border: none;
+  background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
+  color: white;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  box-shadow: 0 4px 15px rgba(255, 75, 110, 0.3);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: all 0.4s ease;
+  z-index: -1;
 }
 
 button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-    background: linear-gradient(135deg, #ff7eb3 0%, #ff758c 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 75, 110, 0.5);
+  background: linear-gradient(135deg, #ff7eb3 0%, #ff758c 100%);
+}
+
+button:hover::before {
+  left: 100%;
 }
 
 button:active {
-    transform: translateY(0);
+  transform: translateY(0);
 }
 
 /* Animations */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes shine {
-    0% { transform: translateX(-100%) rotate(45deg); }
-    50% { transform: translateX(100%) rotate(45deg); }
-    100% { transform: translateX(100%) rotate(45deg); }
+  0% {
+    transform: translateX(-100%) rotate(45deg);
+  }
+  50% {
+    transform: translateX(100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) rotate(45deg);
+  }
 }
 
 /* Responsive design */
-@media screen and (max-width: 1000px) {
-    #flipbook {
-        width: 400px !important;
-        height: 300px !important;
-    }
-    
-    .album-title {
-        font-size: 2em;
-    }
-    
-    .message {
-        font-size: 1.8em;
-        padding: 20px;
-    }
-    
-    button {
-        padding: 10px 20px;
-        font-size: 1em;
-    }
+@media screen and (max-width: 1200px) {
+  #flipbook {
+    width: 800px !important;
+    height: 560px !important;
+  }
+
+  .album-title {
+    font-size: 2em;
+  }
+
+  .message {
+    font-size: 1.8em;
+    padding: 20px;
+  }
+
+  button {
+    padding: 10px 20px;
+    font-size: 1em;
+  }
 }
 
 @media screen and (max-width: 500px) {
-    #flipbook {
-        width: 300px !important;
-        height: 225px !important;
-    }
-    
-    .album-title {
-        font-size: 1.5em;
-    }
-    
-    .message {
-        font-size: 1.4em;
-        padding: 15px;
-    }
-    
-    .controls {
-        flex-direction: column;
-        gap: 10px;
-    }
+  #flipbook {
+    width: 300px !important;
+    height: 225px !important;
+  }
+
+  .album-title {
+    font-size: 1.5em;
+  }
+
+  .message {
+    font-size: 1.4em;
+    padding: 15px;
+  }
+
+  .controls {
+    flex-direction: column;
+    gap: 10px;
+  }
 }
 
 /* Image styles */
 #flipbook .page img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+  filter: brightness(1.05); /* Slightly brighten images for dark mode */
 }
 
 #flipbook .page:hover img {
-    transform: scale(1.02);
-    color: #ff4b6e;
+  transform: scale(1.02);
 }
+
 /* Loading screen styles */
 .loading-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, #ff758c, #ff7eb3);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    color: white;
-    font-family: 'Roboto', sans-serif;
-    font-size: 1.5em;
-    text-align: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #121212; /* Dark background */
+  background-image: radial-gradient(circle at center, #2a2a2a 0%, #121212 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.5em;
+  text-align: center;
 }
 
 .heart-loader {
-    width: 50px;
-    height: 50px;
-    position: relative;
-    animation: heartbeat 1.2s infinite;
-    background: #fff;
-    transform: rotate(45deg);
-    margin-bottom: 20px;
+  width: 50px;
+  height: 50px;
+  position: relative;
+  animation: heartbeat 1.2s infinite;
+  background: #ff4b6e; /* Pink heart */
+  transform: rotate(45deg);
+  margin-bottom: 20px;
+  filter: drop-shadow(0 0 10px rgba(255, 75, 110, 0.5)); /* Glow effect */
 }
 
 .heart-loader:before,
 .heart-loader:after {
-    content: "";
-    width: 50px;
-    height: 50px;
-    background: #fff;
-    border-radius: 50%;
-    position: absolute;
+  content: "";
+  width: 50px;
+  height: 50px;
+  background: #ff4b6e; /* Pink heart */
+  border-radius: 50%;
+  position: absolute;
 }
 
 .heart-loader:before {
-    left: -25px;
+  left: -25px;
 }
 
 .heart-loader:after {
-    top: -25px;
+  top: -25px;
 }
 
 @keyframes heartbeat {
-    0% { transform: rotate(45deg) scale(0.8); }
-    5% { transform: rotate(45deg) scale(0.9); }
-    10% { transform: rotate(45deg) scale(0.8); }
-    15% { transform: rotate(45deg) scale(1); }
-    50% { transform: rotate(45deg) scale(0.8); }
-    100% { transform: rotate(45deg) scale(0.8); }
+  0% {
+    transform: rotate(45deg) scale(0.8);
+  }
+  5% {
+    transform: rotate(45deg) scale(0.9);
+  }
+  10% {
+    transform: rotate(45deg) scale(0.8);
+  }
+  15% {
+    transform: rotate(45deg) scale(1);
+  }
+  50% {
+    transform: rotate(45deg) scale(0.8);
+  }
+  100% {
+    transform: rotate(45deg) scale(0.8);
+  }
 }
 
 .sound-status {
-    font-size: 0.9em;
-    color: #666;
-    margin-bottom: 20px;
-    animation: pulse 2s infinite;
-    opacity: 0.8;
+  font-size: 0.9em;
+  color: #aaa;
+  margin-bottom: 20px;
+  animation: pulse 2s infinite;
+  opacity: 0.8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
 @keyframes pulse {
-    0% { opacity: 0.6; }
-    50% { opacity: 1; }
-    100% { opacity: 0.6; }
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.6;
+  }
 }
 
 /* Hide sound status after click */
 .sound-enabled .sound-status {
-    display: none;
+  display: none;
 }
 
 .music-controls {
-    cursor: pointer;
-    font-size: 1.5em;
-    margin-left: 10px;
-    opacity: 0.8;
-    transition: all 0.3s ease;
+  cursor: pointer;
+  font-size: 1.5em;
+  margin-left: 10px;
+  opacity: 0.8;
+  transition: all 0.3s ease;
+  color: #ff4b6e; /* Pink color */
 }
 
 .music-controls:hover {
-    opacity: 1;
-    transform: scale(1.1);
-}
-
-.sound-status {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 20px;
-    font-size: 1em;
-    color: #666;
+  opacity: 1;
+  transform: scale(1.1);
+  text-shadow: 0 0 10px rgba(255, 75, 110, 0.5); /* Glow effect */
 }
 
 .page-number {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-family: 'Roboto', sans-serif;
-    font-size: 0.9em;
-    color: #666;
-    background: rgba(255, 255, 255, 0.8);
-    padding: 5px 10px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: "Roboto", sans-serif;
+  font-size: 0.9em;
+  color: #fff;
+  background: rgba(255, 75, 110, 0.2);
+  padding: 5px 10px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(5px);
+}
+
+/* Add a subtle particle background effect */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='50' cy='50' r='1' fill='%23ff4b6e' fill-opacity='0.1'/%3E%3C/svg%3E");
+  opacity: 0.3;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Add a subtle vignette effect */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, transparent 30%, rgba(0, 0, 0, 0.7) 100%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* My preferred enhancements */
+/* Animated gradient border */
+@keyframes gradientBorder {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Neon text effect for title */
+@keyframes neonPulse {
+  from {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #ff4b6e, 0 0 20px #ff4b6e, 0 0 25px #ff4b6e, 0 0 30px #ff4b6e, 0
+      0 35px #ff4b6e;
+  }
+  to {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #ff758c, 0 0 20px #ff758c, 0 0 25px #ff758c, 0 0 30px #ff758c, 0
+      0 35px #ff758c;
+  }
 }
